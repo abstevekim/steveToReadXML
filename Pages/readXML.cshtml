@@ -1,0 +1,83 @@
+﻿@page
+@model SteveToFoodSql.Pages.readXMLModel
+@{
+    ViewData["Title"] = "Read XML File";
+}
+
+<h2>Read XML File</h2>
+<h4>@Model.Message</h4>
+</br>
+
+@*@using (Html.BeginForm("UploadXML", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+
+            <div class="col-6">
+                <input type="file" id="fileUpload" name="fileUpload" style="float:left; margin-left:10px; margin-right:100px" asp-for="xmlSteve" />
+            </div>
+            <div class="col-6">
+                <input type="submit" value="Get Cheeses List" />
+            </div>
+        </div>
+    }*@
+
+<form enctype="multipart/form-data" method="post">
+    <dl>
+        <dt>
+            <label>Choose File</label>
+        </dt>
+        <dd>
+            <input name="file" type="file">
+        </dd>
+    </dl>
+    <input asp-page-handler="Upload" class="btn btn-info btn-block" type="submit" value="Upload" />
+</form>
+
+
+@if (@Model.cheShowList)
+{
+    <table class="table table-bordered table-hover" >
+        <tr style="font-size: 12px; important;">
+            <td>File Name</td>
+            <td>@Model.invoiceFileName</td>
+            <td>Invoice Date</td>
+            <td>@Model.invoiceFileDate</td>
+        </tr>
+    </table>
+
+    <table class="table table-bordered table-hover">
+        <tr style="font-size: 12px">
+            <th>Name</th>
+            <th>Type</th>
+            <th>Days To Sell</th>
+            <th>Best Before Date</th>
+            <th>Price</th>
+            <th>@Model.datePlus[1]</th>
+            <th>@Model.datePlus[2]</th>
+            <th>@Model.datePlus[3]</th>
+            <th>@Model.datePlus[4]</th>
+            <th>@Model.datePlus[5]</th>
+            <th>@Model.datePlus[6]</th>
+            <th>@Model.datePlus[7]</th>
+        </tr>
+        @foreach (var item in Model.cheLists)
+        {
+        <tr style="font-size: 12px">
+            <td>@item.Name</td>
+            <td>@item.Type</td>
+            <td>@item.DaysToSell</td>
+            <td>@item.BestBeforeDate</td>
+            <td>@item.Price</td>
+            <td>@item.d01Price</td>
+            <td>@item.d02Price</td>
+            <td>@item.d03Price</td>
+            <td>@item.d04Price</td>
+            <td>@item.d05Price</td>
+            <td>@item.d06Price</td>
+            <td>@item.d07Price</td>
+        </tr>
+        }
+    </table>
+}
+
+@*<p>This is the ASP.NET Core project using the SQL server. ... By Steve</p>*@
